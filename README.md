@@ -32,6 +32,22 @@ This repository **does not train the model** — it only serves it.
 
 ---
 
+## 📦 Model Distribution & Versioning
+
+The machine learning model used by this API is distributed as a **versioned Python package** via **GitHub Releases**.
+
+During the Docker build process, the model package is automatically downloaded and installed from a release artifact (`.whl` file).
+
+This approach ensures:
+- reproducible deployments
+- explicit model versioning
+- immutable model artifacts
+- clean separation between training and serving
+
+The API always serves the exact model version defined in `requirements.txt`.
+
+---
+
 ## 🌐 API Endpoints
 
 | Method | Endpoint | Description |
@@ -39,7 +55,7 @@ This repository **does not train the model** — it only serves it.
 | GET | `/api/v1/health` | Health check |
 | POST | `/api/v1/predict` | Generate prediction |
 
-Interactive API documentation is available via Swagger UI as '/docs'.
+Interactive API documentation is available via Swagger UI at `/docs`.
 
 
 ---
@@ -77,9 +93,10 @@ Response:
 The service is fully containerized using Docker.
 
 Deployment flow:
-	1.	Application packaged in a Docker image
-	2.	Image deployed to Railway
-	3.	Railway handles runtime, scaling and exposure
+1. ML model package is installed from a GitHub Release (`.whl`)
+2. Application is packaged in a Docker image
+3. Image is deployed to Railway
+4. Railway handles runtime, scaling and exposure
 
 The same container can be deployed locally or on other cloud providers.
 
@@ -89,7 +106,6 @@ The same container can be deployed locally or on other cloud providers.
 ```
 bank_retirement_api/
 ├── bank_retirement_api
-│   ├── .DS_Store
 │   ├── app
 │   │   ├── __init__.py
 │   │   ├── api.py
