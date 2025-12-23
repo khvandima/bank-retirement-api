@@ -7,7 +7,7 @@ class PredictionResults(BaseModel):
 
     errors: Optional[Any]
     version: str
-    predictions: Optional[int]
+    predictions: Optional[List[int]]
 
 
 class MultipleBankRetirementDataInputs(BaseModel):
